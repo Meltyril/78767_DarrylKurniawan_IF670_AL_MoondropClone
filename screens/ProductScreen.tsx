@@ -9,10 +9,21 @@ import {
   SafeAreaView,
   Image,
 } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const ProductScreen = () => {
-  const usbDevices = [
+interface ProductScreenProps {
+  navigation: any;
+}
+
+interface Device {
+  id: string;
+  name: string;
+  image: {
+    uri: string;
+  };
+}
+
+const ProductScreen = ({ navigation }: ProductScreenProps) => {
+  const usbDevices: Device[] = [
     {
       id: "1",
       name: "Moonriver 2",
@@ -36,7 +47,7 @@ const ProductScreen = () => {
     },
   ];
 
-  const btDevices = [
+  const btDevices: Device[] = [
     {
       id: "4",
       name: "EDGE",
@@ -60,7 +71,7 @@ const ProductScreen = () => {
     },
   ];
 
-  const wiredDevices = [
+  const wiredDevices: Device[] = [
     {
       id: "7",
       name: "Kadenz",
@@ -77,7 +88,7 @@ const ProductScreen = () => {
     },
   ];
 
-  const renderDeviceItem = ({ item }) => (
+  const renderDeviceItem = ({ item }: { item: Device }) => (
     <TouchableOpacity style={styles.deviceItem}>
       <View style={styles.deviceImageContainer}>
         <Image
@@ -90,12 +101,15 @@ const ProductScreen = () => {
     </TouchableOpacity>
   );
 
-  const renderSectionHeader = (title, toggleable = true) => (
+  const renderSectionHeader = (title: string, toggleable = true) => (
     <View style={styles.sectionHeader}>
       <Text style={styles.sectionTitle}>{title}</Text>
       {toggleable && (
         <TouchableOpacity>
-          <Icon name="menu" size={24} color="white" />
+          <Image
+            source={require("../assets/icons/menu.png")}
+            style={styles.menuIcon}
+          />
         </TouchableOpacity>
       )}
     </View>
@@ -103,7 +117,24 @@ const ProductScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      {/* Header with Logo */}
+      <View style={styles.header}>
+        <View style={styles.headerLeft} />
+        <View style={styles.headerCenter}>
+          <Image
+            source={require("../assets/icons/logohome.png")}
+            style={styles.logoImage}
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => navigation.navigate("AddDevice")}
+        >
+          <Text style={styles.addButtonText}>+</Text>
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView style={styles.scrollContainer}>
         <View style={styles.section}>
           {renderSectionHeader("USB Device")}
           <FlatList
@@ -134,6 +165,42 @@ const ProductScreen = () => {
           />
         </View>
       </ScrollView>
+
+      {/* Navigation Bar */}
+      <View style={styles.navbar}>
+        <TouchableOpacity
+          style={[styles.navItem, styles.navItemActive]}
+          onPress={() => navigation.navigate("Product")}
+        >
+          <Image
+            source={require("../assets/icons/product.png")}
+            style={styles.navIcon}
+          />
+          <Text style={styles.navText}>Product</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Device")}
+        >
+          <Image
+            source={require("../assets/icons/device.png")}
+            style={styles.navIcon}
+          />
+          <Text style={styles.navText}>Device</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Setting")}
+        >
+          <Image
+            source={require("../assets/icons/setting.png")}
+            style={styles.navIcon}
+          />
+          <Text style={styles.navText}>Setting</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -142,6 +209,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#121212",
+  },
+  header: {
+    flexDirection: "row",
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  headerLeft: {
+    height: 30,
+    width: 30,
+  },
+  headerCenter: {
+    flex: 1,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logoImage: {
+    height: 30,
+    width: 120,
+    resizeMode: "contain",
+  },
+  addButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addButtonText: {
+    color: "white",
+    fontSize: 24,
+  },
+  scrollContainer: {
+    flex: 1,
   },
   section: {
     backgroundColor: "#232323",
@@ -161,6 +263,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  menuIcon: {
+    width: 24,
+    height: 24,
+    tintColor: "white",
   },
   deviceItem: {
     flexDirection: "row",
@@ -186,6 +293,32 @@ const styles = StyleSheet.create({
   deviceName: {
     color: "white",
     fontSize: 16,
+  },
+  navbar: {
+    flexDirection: "row",
+    backgroundColor: "#1E1E1E",
+    paddingVertical: 10,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  navItem: {
+    flex: 1,
+    alignItems: "center",
+    padding: 10,
+  },
+  navItemActive: {
+    backgroundColor: "#333",
+    borderRadius: 20,
+  },
+  navIcon: {
+    width: 24,
+    height: 24,
+    marginBottom: 5,
+    tintColor: "white",
+  },
+  navText: {
+    color: "white",
+    fontSize: 12,
   },
 });
 
