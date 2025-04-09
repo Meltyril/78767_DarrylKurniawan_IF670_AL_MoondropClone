@@ -33,7 +33,6 @@ const SelectDeviceScreen = ({ navigation, route }: SelectDeviceScreenProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -45,7 +44,6 @@ const SelectDeviceScreen = ({ navigation, route }: SelectDeviceScreenProps) => {
         <View style={styles.placeholder} />
       </View>
 
-      {/* Device List */}
       <FlatList
         data={selectableDevices}
         keyExtractor={(item) => item.id}
@@ -60,40 +58,6 @@ const SelectDeviceScreen = ({ navigation, route }: SelectDeviceScreenProps) => {
         )}
         contentContainerStyle={styles.listContent}
       />
-
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity
-          style={styles.bottomNavButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Image
-            source={require("../assets/icons/home.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.bottomNavButton} onPress={() => {}}>
-          <Image
-            source={require("../assets/icons/circle.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.bottomNavButton} onPress={() => {}}>
-          <Image
-            source={require("../assets/icons/back.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.bottomNavButton} onPress={() => {}}>
-          <Image
-            source={require("../assets/icons/down.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 };

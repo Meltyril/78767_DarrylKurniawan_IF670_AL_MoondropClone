@@ -30,7 +30,6 @@ const AddDeviceScreen = ({ navigation }: AddDeviceScreenProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -42,9 +41,7 @@ const AddDeviceScreen = ({ navigation }: AddDeviceScreenProps) => {
         <View style={styles.placeholder} />
       </View>
 
-      {/* Content */}
       <ScrollView style={styles.content}>
-        {/* BT Device Section */}
         <View style={styles.deviceTypeContainer}>
           <View style={styles.deviceTypeImageContainer}>
             <Image
@@ -71,7 +68,6 @@ const AddDeviceScreen = ({ navigation }: AddDeviceScreenProps) => {
           </TouchableOpacity>
         </View>
 
-        {/* USB Device Section */}
         <View style={styles.deviceTypeContainer}>
           <View style={styles.deviceTypeImageContainer}>
             <Image
@@ -92,43 +88,6 @@ const AddDeviceScreen = ({ navigation }: AddDeviceScreenProps) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity
-          style={styles.bottomNavButton}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Image
-            source={require("../assets/icons/home.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.bottomNavButton}>
-          <Image
-            source={require("../assets/icons/circle.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.bottomNavButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Image
-            source={require("../assets/icons/back.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.bottomNavButton}>
-          <Image
-            source={require("../assets/icons/down.png")}
-            style={styles.bottomNavIcon}
-          />
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 };

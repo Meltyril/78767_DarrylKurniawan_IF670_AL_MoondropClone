@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
+  Linking,
 } from "react-native";
 import { useDeviceContext } from "../context/DeviceContext";
 
@@ -24,14 +25,25 @@ const DeviceDetailsScreen = ({
   navigation,
   route,
 }: DeviceDetailsScreenProps) => {
-  const { currentDevice } = useDeviceContext();
-  const { deviceId } = route.params || { deviceId: "may" };
+  const { connectedDevices, currentDevice } = useDeviceContext();
+  const { deviceId } = route.params || { deviceId: currentDevice.id };
+
+  // Find the device in all device categories
+  const findDeviceById = () => {
+    const allDevices = [
+      ...connectedDevices.bt,
+      ...connectedDevices.usb,
+      ...connectedDevices.wired,
+    ];
+    return allDevices.find((device) => device.id === deviceId) || currentDevice;
+  };
+
+  const device = findDeviceById();
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -43,13 +55,15 @@ const DeviceDetailsScreen = ({
         <View style={styles.placeholder} />
       </View>
 
-      {/* Device Image */}
       <View style={styles.deviceImageContainer}>
-        <Text style={styles.deviceName}>{currentDevice.name}</Text>
-        <Image source={currentDevice.image} style={styles.deviceImage} />
+        <Text style={styles.deviceName}>{device.name}</Text>
+        <Image
+          source={device.image}
+          style={styles.deviceImage}
+          resizeMode="contain"
+        />
       </View>
 
-      {/* Menu Options */}
       <ScrollView style={styles.menuContainer}>
         {currentDevice.hasEQ && (
           <TouchableOpacity
@@ -74,9 +88,9 @@ const DeviceDetailsScreen = ({
         {currentDevice.hasConfigFile && (
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => {
-              /* Handle configuration file */
-            }}
+            onPress={() =>
+              Linking.openURL("https://moondroplab.com/en/products/may")
+            }
           >
             <Text style={styles.menuText}>Configuration File</Text>
             <Text style={styles.menuArrow}>→</Text>
@@ -94,7 +108,6 @@ const DeviceDetailsScreen = ({
         )}
       </ScrollView>
 
-      {/* Navigation Bar */}
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navItem}
@@ -109,7 +122,7 @@ const DeviceDetailsScreen = ({
 
         <TouchableOpacity
           style={[styles.navItem, styles.navItemActive]}
-          onPress={() => navigation.navigate("Device")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Image
             source={require("../assets/icons/device.png")}

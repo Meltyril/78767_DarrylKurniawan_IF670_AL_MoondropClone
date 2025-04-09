@@ -22,7 +22,6 @@ const CustomEQScreen = ({ navigation }: CustomEQScreenProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -34,7 +33,6 @@ const CustomEQScreen = ({ navigation }: CustomEQScreenProps) => {
         <View style={styles.placeholder} />
       </View>
 
-      {/* Equalizer Image */}
       <View style={styles.imageContainer}>
         <Image
           source={require("../assets/images/equalizer.png")}
@@ -43,7 +41,6 @@ const CustomEQScreen = ({ navigation }: CustomEQScreenProps) => {
         />
       </View>
 
-      {/* Save Button */}
       <TouchableOpacity
         style={styles.saveButton}
         onPress={() => navigation.goBack()}

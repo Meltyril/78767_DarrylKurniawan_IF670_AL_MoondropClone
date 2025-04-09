@@ -6,7 +6,6 @@ const DeviceContext = createContext();
 export const useDeviceContext = () => useContext(DeviceContext);
 
 export const DeviceProvider = ({ children }) => {
-  // State for connected devices
   const [connectedDevices, setConnectedDevices] = useState({
     bt: [
       {
@@ -56,63 +55,74 @@ export const DeviceProvider = ({ children }) => {
     ],
   });
 
-  // State for devices to select
   const [selectableDevices, setSelectableDevices] = useState([
     {
       id: "marigold",
       name: "Marigold",
-      icon: require("../assets/icons/earbuds.png"),
+      icon: "https://moondroplab.com/cdn-cgi/image/format=avif,quality=90/https://cdn.prod.website-files.com/625fb843a8046c1c7861d89e/67207c891055a494012179cb_CD2U-MOBILE.jpg",
     },
-    { id: "rays", name: "Rays", icon: require("../assets/icons/earbuds.png") },
+    {
+      id: "rays",
+      name: "Rays",
+      icon: "https://shenzhenaudio.com/cdn/shop/files/1_aa7b5e08-48ce-4580-b7fd-1b9d2a5dd47f.png?v=1744167150",
+    },
     {
       id: "echo-b",
       name: "ECHO-B",
-      icon: require("../assets/icons/earbuds.png"),
+      icon: "https://csi-zone.id/cdn/shop/files/1737422518477_1.png?v=1737423159",
     },
     {
       id: "starlight",
       name: "Starlight",
-      icon: require("../assets/icons/earbuds-star.png"),
+      icon: "https://m.media-amazon.com/images/S/aplus-media/sc/b9baf44d-8feb-4090-8f21-8535d4a42b64.__CR0,0,300,300_PT0_SX300_V1___.jpg",
     },
     {
       id: "chu2-dsp",
       name: "CHU2 DSP",
-      icon: require("../assets/icons/earphones-alt.png"),
+      icon: "https://cdn.prod.website-files.com/627128d862c9a44234848dda/64a67decb6354a3471c0d4cd_CHU2.jpg",
     },
     {
       id: "dusk-sp",
       name: "DUSK-SP",
-      icon: require("../assets/icons/earphones-dual.png"),
+      icon: "https://www.theaudiostore.in/cdn/shop/articles/Review_of_MOONDROP_x_Crinacle_DUSK_In-ear_Monitor.png?v=1716356894",
     },
     {
       id: "cdsp",
       name: "CDSP",
-      icon: require("../assets/icons/earphones-round.png"),
+      icon: "https://down-id.img.susercontent.com/file/id-11134207-7r98p-lov7f3bm7a19fc",
     },
-    { id: "may", name: "MAY", icon: require("../assets/icons/earbuds.png") },
+    {
+      id: "may",
+      name: "MAY",
+      icon: "https://cdn.prod.website-files.com/627128d862c9a44234848dda/65780ab878fffdcd92172123_MAY.jpg",
+    },
     {
       id: "freedsp",
       name: "FreeDSP",
-      icon: require("../assets/icons/earphones-circle.png"),
+      icon: "https://images.tokopedia.net/img/cache/700/VqbcmM/2023/11/24/e4782aee-c938-4174-95b2-63514e9307b9.jpg",
+    },
+    {
+      id: "nekocake",
+      name: "Nekocake",
+      icon: "https://images.tokopedia.net/img/cache/700/OJWluG/2023/3/7/f07867cf-cc4c-4bb3-a394-632c74d7c8c8.jpg",
     },
     {
       id: "dawn-pro",
       name: "DAWN PRO",
-      icon: require("../assets/icons/earbuds-alt.png"),
+      icon: "https://cdn.prod.website-files.com/627128d862c9a44234848dda/64d9c81be627fe010d036677_DAWNPRO.jpg",
     },
     {
       id: "moonriver",
       name: "MOONRIVER 2 Ti",
-      icon: require("../assets/icons/earbuds-alt.png"),
+      icon: "https://cdn.prod.website-files.com/627128d862c9a44234848dda/648680b3b0d3ba0453460997_MOONRIVER2TI.jpg",
     },
     {
       id: "dawn-3",
       name: "DAWN 3.5",
-      icon: require("../assets/icons/earbuds-generic.png"),
+      icon: "https://cdn.prod.website-files.com/627128d862c9a44234848dda/641e4e1867c6992f22d766c8_DAWN-3.5.jpg",
     },
   ]);
 
-  // Current device state
   const [currentDevice, setCurrentDevice] = useState({
     id: "may",
     name: "MAY",
@@ -126,7 +136,6 @@ export const DeviceProvider = ({ children }) => {
     hasFirmwareUpdate: true,
   });
 
-  // Wallpapers
   const [wallpapers, setWallpapers] = useState([
     {
       id: "1",
@@ -168,13 +177,12 @@ export const DeviceProvider = ({ children }) => {
       image: "https://pbs.twimg.com/media/Gc9DtgrWwAA4t8c.jpg:large",
     },
   ]);
-  // Settings
+
   const [settings, setSettings] = useState({
     nightMode: true,
     language: "English",
   });
 
-  // Add a device
   const addDevice = (deviceType, device) => {
     setConnectedDevices((prev) => ({
       ...prev,
@@ -182,13 +190,27 @@ export const DeviceProvider = ({ children }) => {
     }));
   };
 
-  // Select a device to make it current
   const selectDevice = (deviceId) => {
-    const deviceInfo = selectableDevices.find((d) => d.id === deviceId);
-    if (deviceInfo) {
+    const selectableDevice = selectableDevices.find((d) => d.id === deviceId);
+
+    const allConnectedDevices = [
+      ...connectedDevices.bt,
+      ...connectedDevices.usb,
+      ...connectedDevices.wired,
+    ];
+    const connectedDevice = allConnectedDevices.find((d) => d.id === deviceId);
+
+    // Determine the device to set as current
+    const deviceToSet = connectedDevice || selectableDevice;
+
+    if (deviceToSet) {
       setCurrentDevice({
-        ...deviceInfo,
-        image: require("../assets/devices/may.png"), // Default to may image for example
+        id: deviceToSet.id,
+        name: deviceToSet.name,
+        image:
+          deviceToSet.image ||
+          deviceToSet.icon ||
+          require("../assets/devices/may.png"),
         hasEQ: true,
         hasCustomEQ: true,
         hasConfigFile: true,

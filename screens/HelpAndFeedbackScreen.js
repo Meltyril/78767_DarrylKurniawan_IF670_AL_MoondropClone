@@ -16,19 +16,13 @@ const HelpAndFeedbackScreen = ({ navigation }) => {
   const [feedback, setFeedback] = useState("");
 
   const handleSubmit = () => {
-    // Handle the feedback submission logic here
     console.log("Feedback submitted:", feedback);
 
-    // Reset the input field
     setFeedback("");
-
-    // Optionally, navigate back or show a success message
-    // navigation.goBack();
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}

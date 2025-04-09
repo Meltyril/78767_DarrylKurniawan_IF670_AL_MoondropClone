@@ -19,8 +19,6 @@ const WallpaperScreen = ({ navigation }: WallpaperScreenProps) => {
   const { wallpapers } = useDeviceContext();
 
   const handleSelectWallpaper = (wallpaperId: string) => {
-    // Logic to select wallpaper
-    // Then navigate back
     navigation.goBack();
   };
 
@@ -28,7 +26,6 @@ const WallpaperScreen = ({ navigation }: WallpaperScreenProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -40,7 +37,6 @@ const WallpaperScreen = ({ navigation }: WallpaperScreenProps) => {
         <View style={styles.placeholder} />
       </View>
 
-      {/* Wallpaper Grid */}
       <FlatList
         data={wallpapers}
         numColumns={2}
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
   },
   bottomNav: {
     position: "absolute",
-    bottom: 50, // Adjust to position above system navigation
+    bottom: 50,
     left: 0,
     right: 0,
     flexDirection: "row",

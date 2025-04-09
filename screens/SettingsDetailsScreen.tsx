@@ -111,8 +111,6 @@ const SettingsDetailsScreen = ({
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
-
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -126,7 +124,6 @@ const SettingsDetailsScreen = ({
         <View style={styles.placeholder} />
       </View>
 
-      {/* Content */}
       <ScrollView style={styles.content}>{renderContent()}</ScrollView>
     </SafeAreaView>
   );

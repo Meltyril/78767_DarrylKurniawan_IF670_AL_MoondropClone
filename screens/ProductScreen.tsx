@@ -117,7 +117,6 @@ const ProductScreen = ({ navigation }: ProductScreenProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header with Logo */}
       <View style={styles.header}>
         <View style={styles.headerLeft} />
         <View style={styles.headerCenter}>
@@ -166,7 +165,6 @@ const ProductScreen = ({ navigation }: ProductScreenProps) => {
         </View>
       </ScrollView>
 
-      {/* Navigation Bar */}
       <View style={styles.navbar}>
         <TouchableOpacity
           style={[styles.navItem, styles.navItemActive]}
@@ -181,7 +179,7 @@ const ProductScreen = ({ navigation }: ProductScreenProps) => {
 
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("Device")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Image
             source={require("../assets/icons/device.png")}

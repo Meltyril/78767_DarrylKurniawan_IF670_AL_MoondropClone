@@ -21,10 +21,7 @@ const DeviceScreen = ({ navigation }: DeviceScreenProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
-
-      {/* Main Content */}
       <ScrollView style={styles.content}>
-        {/* USB Devices */}
         <View style={styles.deviceSection}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>USB Device</Text>
@@ -46,8 +43,6 @@ const DeviceScreen = ({ navigation }: DeviceScreenProps) => {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* BT Devices */}
         <View style={styles.deviceSection}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>BT Device</Text>
@@ -69,8 +64,6 @@ const DeviceScreen = ({ navigation }: DeviceScreenProps) => {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* Wired Devices */}
         <View style={styles.deviceSection}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Wired Devices</Text>
@@ -107,8 +100,8 @@ const DeviceScreen = ({ navigation }: DeviceScreenProps) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => navigation.navigate("Device")}
+          style={[styles.navItem, styles.navItemActive]}
+          onPress={() => navigation.navigate("Home")}
         >
           <Image
             source={require("../assets/icons/device.png")}
@@ -118,7 +111,7 @@ const DeviceScreen = ({ navigation }: DeviceScreenProps) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.navItem, styles.navItemActive]}
+          style={styles.navItem}
           onPress={() => navigation.navigate("Setting")}
         >
           <Image

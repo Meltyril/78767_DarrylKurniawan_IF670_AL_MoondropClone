@@ -9,6 +9,7 @@ import {
   StatusBar,
   ScrollView,
   Switch,
+  Linking,
 } from "react-native";
 import { useDeviceContext } from "../context/DeviceContext";
 
@@ -23,7 +24,6 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
 
-      {/* Header with back button */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -35,9 +35,7 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
         <View style={styles.placeholder} />
       </View>
 
-      {/* Settings Content */}
       <ScrollView style={styles.content}>
-        {/* Display Settings */}
         <View style={styles.settingSection}>
           <View style={styles.settingItem}>
             <Text style={styles.settingLabel}>Night Mode</Text>
@@ -52,12 +50,7 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
             </View>
           </View>
 
-          <TouchableOpacity
-            style={styles.settingItem}
-            onPress={() => {
-              /* Handle language change */
-            }}
-          >
+          <TouchableOpacity style={styles.settingItem} onPress={() => {}}>
             <Text style={styles.settingLabel}>Language</Text>
             <View style={styles.settingValue}>
               <Text style={styles.settingValueText}>{settings.language}</Text>
@@ -66,20 +59,16 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
           </TouchableOpacity>
         </View>
 
-        {/* Data Management */}
         <View style={styles.settingSection}>
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => {
-              /* Handle wipe data */
-            }}
+            onPress={() => navigation.navigate("WipeData")}
           >
             <Text style={styles.settingLabel}>Wipe Data</Text>
             <Text style={styles.settingArrow}>→</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Additional Settings */}
         <View style={styles.settingSection}>
           <TouchableOpacity
             style={styles.settingItem}
@@ -91,9 +80,9 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
 
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => {
-              /* Handle privacy policy */
-            }}
+            onPress={() =>
+              Linking.openURL("https://moondroplab.com/en/security-privacy")
+            }
           >
             <Text style={styles.settingLabel}>Privacy Policy</Text>
             <Text style={styles.settingArrow}>→</Text>
@@ -101,9 +90,9 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
 
           <TouchableOpacity
             style={styles.settingItem}
-            onPress={() => {
-              /* Handle user agreement */
-            }}
+            onPress={() =>
+              Linking.openURL("https://www.moondropsites.com/terms-of-service")
+            }
           >
             <Text style={styles.settingLabel}>User Agreement</Text>
             <Text style={styles.settingArrow}>→</Text>
@@ -118,7 +107,6 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
           </TouchableOpacity>
         </View>
 
-        {/* Follow Us Section */}
         <View style={styles.followSection}>
           <Text style={styles.followTitle}>Follow us:</Text>
           <View style={styles.socialIcons}>
@@ -146,7 +134,6 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
         </View>
       </ScrollView>
 
-      {/* Navigation Bar */}
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navItem}
@@ -161,7 +148,7 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
 
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("Device")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Image
             source={require("../assets/icons/device.png")}

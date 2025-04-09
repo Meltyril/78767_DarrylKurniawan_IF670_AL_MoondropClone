@@ -126,7 +126,6 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         />
       )}
 
-      {/* Navigation Bar */}
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navItem}
@@ -141,7 +140,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
 
         <TouchableOpacity
           style={[styles.navItem, styles.navItemActive]}
-          onPress={() => navigation.navigate("Device")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Image
             source={require("../assets/icons/device.png")}
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
   },
   headerLeft: {
     height: 30,
-    width: 30, // Same width as the add button to ensure balance
+    width: 30,
   },
   headerCenter: {
     flex: 1,
