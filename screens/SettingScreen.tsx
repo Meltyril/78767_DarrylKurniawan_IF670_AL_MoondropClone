@@ -50,7 +50,14 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
             </View>
           </View>
 
-          <TouchableOpacity style={styles.settingItem} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={() =>
+              navigation.navigate("SettingsDetails", {
+                settingType: "language",
+              })
+            }
+          >
             <Text style={styles.settingLabel}>Language</Text>
             <View style={styles.settingValue}>
               <Text style={styles.settingValueText}>{settings.language}</Text>
