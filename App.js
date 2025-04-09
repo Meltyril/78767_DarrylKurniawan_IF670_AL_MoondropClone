@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { DeviceProvider } from "./context/DeviceContext";
 
-// Import screens
 import HomeScreen from "./screens/HomeScreen";
 import DeviceScreen from "./screens/DeviceScreen";
 import DeviceDetailsScreen from "./screens/DeviceDetailsScreen";
@@ -17,6 +16,7 @@ import CustomEQScreen from "./screens/CustomEQScreen";
 import FirmwareUpdateScreen from "./screens/FirmwareUpdateScreen";
 import WallpaperScreen from "./screens/WallpaperScreen";
 import HelpAndFeedbackScreen from "./screens/HelpAndFeedbackScreen";
+import WipeDataScreen from "./screens/WipeDataScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +53,7 @@ const App = () => {
             name="HelpAndFeedback"
             component={HelpAndFeedbackScreen}
           />
+          <Stack.Screen name="WipeData" component={WipeDataScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </DeviceProvider>
